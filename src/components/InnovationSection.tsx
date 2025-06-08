@@ -1,5 +1,6 @@
+
 import React from "react";
-import { Button } from "@/components/ui/button"; // Assuming this path is correct
+import { Button } from "@/components/ui/button";
 import {
   Award,
   PlayCircle,
@@ -7,14 +8,14 @@ import {
   Stethoscope,
   ArrowRight,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
-const CompanyIcon = ({ className }) => (
+const CompanyIcon = ({ className }: { className?: string }) => (
   <Stethoscope className={className} strokeWidth={1.5} />
 );
 
 const AboutCompanySection = () => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const LEFT_IMAGE_URL =
     "https://images.unsplash.com/photo-1579165466949-3180a3d056d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80";
@@ -22,7 +23,7 @@ const AboutCompanySection = () => {
     "https://images.unsplash.com/photo-1554734867-bf3c00a49371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
 
   const handleEnquiryClick = () => {
-    navigate("/contact"); // Navigate to the contact page
+    navigate("/contact");
   };
 
   return (
@@ -35,13 +36,13 @@ const AboutCompanySection = () => {
         <div className="grid lg:grid-cols-2 gap-16 md:gap-20 items-center">
           {/* Left Column */}
           <div
-            className="animate-slide-in-left" // Make sure these animation classes are defined in your global CSS
+            className="animate-slide-in-left"
             style={{ animationDelay: "0.2s" }}
           >
             <div className="relative group mb-10 shadow-2xl rounded-2xl overflow-hidden">
               <img
                 src={LEFT_IMAGE_URL}
-                alt="Madrid Pharmaceuticals Research Lab" // Changed alt text to be more generic
+                alt="Madrid Pharmaceuticals Research Lab"
                 className="w-full h-auto max-h-[500px] object-cover rounded-2xl transform group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -63,7 +64,7 @@ const AboutCompanySection = () => {
 
             <p className="text-slate-700 leading-relaxed mb-8 text-md md:text-lg">
               We are committed to providing access to affordable and innovative
-              medicines, driven by our purpose of 'Good Health Can’t Wait'. Our
+              medicines, driven by our purpose of 'Good Health Can't Wait'. Our
               products and services span Active Pharmaceuticals Ingredients
               (API), generics, and branded generics.
             </p>
@@ -72,21 +73,20 @@ const AboutCompanySection = () => {
               <Button
                 size="lg"
                 className="bg-pharma-blue hover:bg-pharma-darkBlue text-white px-8 py-3 text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center group transform hover:scale-105 w-full sm:w-auto"
-                onClick={() => navigate("/about")} // Example: Learn More button navigates to /about
+                onClick={() => navigate("/about")}
               >
                 Learn More
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
 
-              {/* === MODIFIED ENQUIRY SECTION === */}
               <div
                 className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300 transform hover:scale-105"
-                onClick={handleEnquiryClick} // Added onClick handler
-                role="button" // Added role for accessibility
-                tabIndex={0} // Added tabIndex for keyboard accessibility
+                onClick={handleEnquiryClick}
+                role="button"
+                tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") handleEnquiryClick();
-                }} // Keyboard interaction
+                }}
               >
                 <div className="p-2.5 bg-pharma-green/10 rounded-full">
                   <Phone className="w-4 h-4 text-pharma-green" />
@@ -95,21 +95,14 @@ const AboutCompanySection = () => {
                   <span className="block text-xs text-slate-500">
                     Enquiries
                   </span>
-                  {/* The phone number is still displayed but the whole block is clickable */}
-                  {/* <span // Changed <a> to <span> as the parent div is the clickable target
-                    className="text-pharma-darkBlue font-semibold text-base group-hover:text-pharma-blue transition-colors" // Added group-hover for text color
-                  >
-                    +91 7564852518
-                  </span> */}
                 </div>
               </div>
-              {/* === END OF MODIFIED ENQUIRY SECTION === */}
             </div>
           </div>
 
           {/* Right Column */}
           <div
-            className="lg:pl-8 animate-slide-in-right" // Make sure these animation classes are defined
+            className="lg:pl-8 animate-slide-in-right"
             style={{ animationDelay: "0.4s" }}
           >
             <div className="flex items-center gap-3 text-base font-semibold uppercase text-pharma-green mb-4">
