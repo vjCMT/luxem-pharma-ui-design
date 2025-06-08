@@ -2,10 +2,10 @@ import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react"; // Removed PackageSearch as it's in StatsSection
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useScrollAnimation from "../hooks/useScrollAnimation";
-import StatsSection from "./StatsSection"; // Import the StatsSection
+import StatsSection from "./StatsSection";
 
 // Ensure your product data has distinct image paths if they are local
 const featuredProducts = [
@@ -82,7 +82,7 @@ const OurProductsAndStats = () => {
     [emblaApi]
   );
 
-  const handleProductClick = (slug) => {
+  const handleProductClick = (slug: string) => {
     navigate(`/products/${slug}`);
   };
 
@@ -92,15 +92,13 @@ const OurProductsAndStats = () => {
   return (
     <section
       ref={sectionRefHook}
-      className="py-16 md:py-20 bg-pharma-darkBlue text-white relative" // Removed initial opacity-0 if hook handles it
+      className="py-16 md:py-20 bg-pharma-darkBlue text-white relative"
       style={{
         backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.92), rgba(23, 37, 84, 0.95)), url(${sectionBackgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
-        // backgroundAttachment: 'fixed', // Uncomment for parallax effect
       }}
     >
-      {/* Stats Section is rendered here, above the product carousel title */}
       <StatsSection />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-12 md:mt-16">
@@ -135,64 +133,57 @@ const OurProductsAndStats = () => {
 
         <div className="embla -mx-2 sm:-mx-4" ref={emblaRef}>
           <div className="embla__container flex pb-4">
-            {featuredProducts.map(
-              (
-                product // Removed index from map key if slug is unique
-              ) => (
-                <div
-                  className="embla__slide flex-[0_0_85%] sm:flex-[0_0_45%] md:flex-[0_0_31%] lg:flex-[0_0_24%] min-w-0 px-2 sm:px-3"
-                  key={product.slug} // Use a unique product identifier like slug for the key
+            {featuredProducts.map((product) => (
+              <div
+                className="embla__slide flex-[0_0_85%] sm:flex-[0_0_45%] md:flex-[0_0_31%] lg:flex-[0_0_24%] min-w-0 px-2 sm:px-3"
+                key={product.slug}
+              >
+                <Card
+                  className={`h-full flex flex-col bg-slate-800/60 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden group 
+                            border-2 border-slate-700/80 hover:${product.borderColor}/70 
+                            transition-all duration-400 transform hover:-translate-y-1.5 hover:shadow-[0_0_35px_-10px_rgba(var(--card-shadow-rgb),0.4)] cursor-pointer`}
+                  onClick={() => handleProductClick(product.slug)}
                 >
-                  <Card
-                    className={`h-full flex flex-col bg-slate-800/60 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden group 
-                              border-2 border-slate-700/80 hover:${product.borderColor}/70 
-                              transition-all duration-400 transform hover:-translate-y-1.5 hover:shadow-[0_0_35px_-10px_rgba(var(--card-shadow-rgb),0.4)] cursor-pointer`}
-                    // Simplified style for shadow, ensure your Tailwind config has the accent colors for borders.
-                    // The CSS variable approach for shadow is fine if you have the --X-rgb vars globally.
-                    // For simplicity here, I'm relying on Tailwind's direct border color class.
-                    onClick={() => handleProductClick(product.slug)}
-                  >
-                    <div className="relative h-52 sm:h-56 w-full overflow-hidden rounded-t-xl">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 ease-out bg-slate-200/5"
-                        loading="lazy"
+                  <div className="relative h-52 sm:h-56 w-full overflow-hidden rounded-t-xl">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 ease-out bg-slate-200/5"
+                      loading="lazy"
+                    />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t ${product.gradient} opacity-5 group-hover:opacity-10`}
+                    ></div>
+                    <span
+                      className={`absolute top-3 right-3 text-xs font-semibold bg-slate-900/70 ${product.accentColor} px-3 py-1 rounded-full backdrop-blur-sm shadow-sm`}
+                    >
+                      {product.category}
+                    </span>
+                  </div>
+                  <CardHeader className="pt-5 pb-1 px-4 sm:px-5">
+                    <CardTitle
+                      className={`text-lg sm:text-xl font-semibold ${product.accentColor} truncate`}
+                    >
+                      {product.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0 pb-4 sm:pb-5 px-4 sm:px-5 flex flex-col flex-grow">
+                    <p className="text-xs sm:text-sm text-slate-400 mb-4 line-clamp-2 flex-grow min-h-[40px]">
+                      {product.description}
+                    </p>
+                    <span
+                      className={`inline-flex items-center text-sm font-medium ${product.accentColor} group-hover:underline self-start`}
+                    >
+                      View Details{" "}
+                      <ArrowRight
+                        size={16}
+                        className="ml-1.5 transition-transform group-hover:translate-x-1"
                       />
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-t ${product.gradient} opacity-5 group-hover:opacity-10`}
-                      ></div>
-                      <span
-                        className={`absolute top-3 right-3 text-xs font-semibold bg-slate-900/70 ${product.accentColor} px-3 py-1 rounded-full backdrop-blur-sm shadow-sm`}
-                      >
-                        {product.category}
-                      </span>
-                    </div>
-                    <CardHeader className="pt-5 pb-1 px-4 sm:px-5">
-                      <CardTitle
-                        className={`text-lg sm:text-xl font-semibold ${product.accentColor} truncate`}
-                      >
-                        {product.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0 pb-4 sm:pb-5 px-4 sm:px-5 flex flex-col flex-grow">
-                      <p className="text-xs sm:text-sm text-slate-400 mb-4 line-clamp-2 flex-grow min-h-[40px]">
-                        {product.description}
-                      </p>
-                      <span
-                        className={`inline-flex items-center text-sm font-medium ${product.accentColor} group-hover:underline self-start`}
-                      >
-                        View Details{" "}
-                        <ArrowRight
-                          size={16}
-                          className="ml-1.5 transition-transform group-hover:translate-x-1"
-                        />
-                      </span>
-                    </CardContent>
-                  </Card>
-                </div>
-              )
-            )}
+                    </span>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
         <div className="text-center mt-12 md:mt-16">

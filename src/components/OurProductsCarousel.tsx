@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-// ... (other imports: ArrowLeft, ArrowRight, useNavigate, Card, Button from previous response)
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -8,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 
 const productsData = [
-  /* ... your product data ... */
   {
     name: "Lexprate-CR",
     category: "Cardiovascular",
@@ -56,13 +54,12 @@ const productsData = [
 ];
 
 const OurProductsCarousel = () => {
-  const sectionRef = useScrollAnimation("animate-fade-in"); // Animate whole section
+  const sectionRef = useScrollAnimation("animate-fade-in");
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
     containScroll: "trimSnaps",
   });
-  // ... (scrollPrev, scrollNext, handleProductClick from previous response)
   const navigate = useNavigate();
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -72,7 +69,7 @@ const OurProductsCarousel = () => {
     () => emblaApi && emblaApi.scrollNext(),
     [emblaApi]
   );
-  const handleProductClick = (slug) => navigate(`/products/${slug}`);
+  const handleProductClick = (slug: string) => navigate(`/products/${slug}`);
 
   return (
     <section
@@ -88,7 +85,6 @@ const OurProductsCarousel = () => {
             </span>
           </h2>
           <div className="flex items-center gap-3">
-            {/* Navigation buttons (same as previous carousel code) */}
             <Button
               onClick={scrollPrev}
               variant="outline"
@@ -109,19 +105,17 @@ const OurProductsCarousel = () => {
         </div>
 
         <div className="embla -mx-2" ref={emblaRef}>
-          {" "}
-          {/* Added negative margin to counteract pl-4 on slides */}
           <div className="embla__container flex">
             {productsData.map((product, index) => (
               <div
-                className="embla__slide flex-[0_0_90%] sm:flex-[0_0_45%] md:flex-[0_0_31%] lg:flex-[0_0_24%] min-w-0 px-2" // Adjusted padding
+                className="embla__slide flex-[0_0_90%] sm:flex-[0_0_45%] md:flex-[0_0_31%] lg:flex-[0_0_24%] min-w-0 px-2"
                 key={product.slug + index}
               >
                 <Card
                   className={`h-full flex flex-col bg-slate-900 rounded-2xl shadow-2xl overflow-hidden group 
-                              border-2 border-slate-800 hover:border-opacity-70 transition-all duration-400 
-                              transform hover:-translate-y-2 hover:shadow-[0_0_40px_-10px_rgba(var(--card-shadow-rgb),0.5)] cursor-pointer
-                              ${product.borderColor}`} // Use the specific border color from data
+                            border-2 border-slate-800 hover:border-opacity-70 transition-all duration-400 
+                            transform hover:-translate-y-2 hover:shadow-[0_0_40px_-10px_rgba(var(--card-shadow-rgb),0.5)] cursor-pointer
+                            ${product.borderColor}`}
                   style={
                     {
                       "--card-shadow-rgb":
@@ -138,7 +132,7 @@ const OurProductsCarousel = () => {
                 >
                   <div className="relative h-52 w-full overflow-hidden">
                     <img
-                      /* ... image same as before ... */ src={product.image}
+                      src={product.image}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     />

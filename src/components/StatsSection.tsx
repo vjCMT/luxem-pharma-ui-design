@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { Briefcase, PackageSearch, MapPin, FlaskConical } from "lucide-react";
-import useScrollAnimation from "../hooks/useScrollAnimation"; // Corrected path assumption
+import { Briefcase, PackageSearch, MapPin, FlaskConical, LucideIcon } from "lucide-react";
+import useScrollAnimation from "../hooks/useScrollAnimation";
 
-// AnimatedStat component (can be in this file or imported)
+// Define proper types for the AnimatedStat component
+interface AnimatedStatProps {
+  finalValue: string | number;
+  label: string;
+  duration?: number;
+  icon?: LucideIcon;
+  iconColor?: string;
+}
+
 const AnimatedStat = ({
   finalValue,
   label,
   duration = 2000,
   icon: IconComponent,
   iconColor = "text-pharma-green",
-}) => {
+}: AnimatedStatProps) => {
   const [count, setCount] = useState(0);
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -91,7 +99,7 @@ const StatsSection = () => {
       label: "City Presence",
       icon: MapPin,
       iconColor: "text-accent-purple",
-    }, // Changed from "City"
+    },
     {
       value: "1",
       label: "R&D Centers",

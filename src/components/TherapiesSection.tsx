@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,7 @@ const TherapiesSection = () => {
       slug: "neurology",
       rating: 4.9,
       patients: "10K+",
-      color: "pharma-blue", // Base color name from Tailwind config
+      color: "pharma-blue",
       gradient: "from-pharma-blue to-sky-500",
     },
     {
@@ -31,7 +32,7 @@ const TherapiesSection = () => {
       slug: "cardiology",
       rating: 4.8,
       patients: "15K+",
-      color: "accent-pink", // Example using an accent color
+      color: "accent-pink",
       gradient: "from-pink-500 to-rose-500",
     },
     {
@@ -49,7 +50,7 @@ const TherapiesSection = () => {
     },
   ];
 
-  const handleTherapyClick = (slug) => {
+  const handleTherapyClick = (slug: string) => {
     navigate(`/therapies/${slug}`);
   };
 
@@ -102,11 +103,11 @@ const TherapiesSection = () => {
               style={
                 {
                   animationDelay: `${0.2 + index * 0.15}s`,
-                  "--pharma-blue-rgb": "30, 99, 234", // For dynamic shadow color
+                  "--pharma-blue-rgb": "30, 99, 234",
                   "--accent-pink-rgb": "236, 72, 153",
                   "--pharma-green-rgb": "39, 174, 96",
                 } as React.CSSProperties
-              } // Type assertion for CSS variables
+              }
               onClick={() => handleTherapyClick(therapy.slug)}
             >
               <div className="relative h-52 overflow-hidden">

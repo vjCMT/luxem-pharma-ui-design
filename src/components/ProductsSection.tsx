@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import useScrollAnimation from "../hooks/useScrollAnimation"; // Ensure path is correct
+import useScrollAnimation from "../hooks/useScrollAnimation";
 
 // Import your actual product images
 import Faldecort from "/assets/images/productDetails/FALDECORT3-Photoroom.png";
@@ -16,13 +16,20 @@ import Livozorbxtsup from "/assets/images/productDetails/LIVOZORB XT SUP-Photoro
 import LuxboneFem from "/assets/images/productDetails/LUXBONE FEM-Photoroom.png";
 import Pandoride from "/assets/images/productDetails/PANDORIDE-Photoroom.png";
 
-// === AnimatedStat COMPONENT POORI TARAH SE RESTORE KAR DIYA GAYA HAI ===
+// Define proper types for AnimatedStat
+interface AnimatedStatProps {
+  finalValue: string | number;
+  label: string;
+  duration?: number;
+  iconColor?: string;
+}
+
 const AnimatedStat = ({
   finalValue,
   label,
   duration = 2000,
   iconColor = "text-pharma-green",
-}) => {
+}: AnimatedStatProps) => {
   const [count, setCount] = useState(0);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   useEffect(() => {
@@ -70,7 +77,6 @@ const ProductsSection = () => {
     0.05
   ) as React.RefCallback<HTMLElement> | null;
 
-  // === companyStats DATA BHI THEEK KAR DIYA GAYA HAI ===
   const companyStats = [
     { value: "35", label: "Employees", iconColor: "text-pharma-green" },
     { value: "50", label: "Products", iconColor: "text-pharma-lightBlue" },
@@ -131,7 +137,7 @@ const ProductsSection = () => {
       name: "Luxbone",
       description:
         "A premium, comprehensive formula for building and maintaining strong, healthy bones in adults.",
-      image: LuxboneFem, // Placeholder
+      image: LuxboneFem,
       slug: "immunolux",
       color: "from-yellow-500 to-orange-500",
     },
